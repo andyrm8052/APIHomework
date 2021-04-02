@@ -6,34 +6,11 @@ const open = require("open");
 app.use(express.static('docs'));
 open("http://localhost:9080");
 
-
-app.get('/api/v1/cities', function(req, res) {
-    const mysql = require('mysql')
-    const connection = mysql.createConnection({
-        host: 'localhost',
-        port: '32000',
-        user: 'root',
-        password: 'root',
-        database: 'citiesData'
-    });
-    connection.connect();
-
-    connection.query('SELECT * FROM tblCitiesImport', function (err, rows, fields) {
-        if (err) throw err;
-        res.json({ "data": rows});
-    })
-
-    connection.end()
-
-
-});
-
-
 app.get('/api/v1/snakes_count_100', function(req, res) {
     const mysql = require('mysql')
     const connection = mysql.createConnection({
         host: 'localhost',
-        port: '32000',
+        port: '3306',
         user: 'root',
         password: 'root',
         database: 'snakeData'
