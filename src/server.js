@@ -28,6 +28,27 @@ app.get('/api/v1/cities', function(req, res) {
 
 });
 
+
+app.get('/api/v1/snakes_count_100', function(req, res) {
+    const mysql = require('mysql')
+    const connection = mysql.createConnection({
+        host: 'localhost',
+        port: '32000',
+        user: 'root',
+        password: 'root',
+        database: 'snakeData'
+    });
+    connection.connect();
+
+    connection.query('SELECT * FROM snakes', function (err, rows, fields) {
+        if (err) throw err;
+        res.json({ "data": rows});
+    })
+
+    connection.end()
+
+});
+
 app.set('port', process.env.PORT || 8000);
 app.set('ip', process.env.NODEJS_IP || '127.0.0.1');
 
